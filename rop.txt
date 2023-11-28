@@ -1,0 +1,28 @@
+A9054600:	pop eax
+		ret
+38EF5300:	g_buffer[0]
+AB054600:	pop ecx
+		ret
+32303931:	4 bytes of id
+AD054600:	mov [eax], ecx
+		ret
+A9054600:	pop eax
+		ret
+3CEF5300:	g_buffer[4]
+AB054600:	pop ecx
+		ret
+39323739:	another 4 bytes of id
+AD054600:	mov [eax], ecx
+		ret
+A9054600:	pop eax
+		ret
+40EF5300:	g_buffer[8]
+AB054600:	pop ecx
+		ret
+38000000:	last byte of id
+AD054600:	mov [eax], ecx
+		ret
+00084600:	printf
+50474C00:	exit
+38EF5300:	g_buffer[0]
+

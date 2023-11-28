@@ -1,0 +1,41 @@
+	# create file
+0: 31 c0		xor eax, eax
+2: eb 26		jmp 0x2a
+4: 5b			pop ebx
+5: 88 43 06		mov [ebx+0x6], al			; ebx = "id.txt"
+8: b0 08		mov al, 0x8				; eax = 8 -> create
+a: 31 c9		xor ecx, ecx
+c: 66 b9 ff 01	mov cx, 0x1ff			; ecx = 0x1ff -> read and write permissions
+10: cd 80		int 0x80
+
+	# write into file
+12: 89 c3		mov ebx, eax			; ebx = file descriptor
+14: 31 c0		xor eax, eax
+16: b0 04		mov al, 0x4				; eax = 4 -> write
+18: eb 1c		jmp 0x36
+1a: 59		pop ecx				; ecx = "209192798"
+1b: 31 d2		xor edx, edx
+1d: b2 08		mov dl, 0x8
+1f: 42		inc edx				; edx = 9
+20: cd 80		int 0x80
+
+	# exit
+22: 31 c0		xor eax, eax
+24: b0 01		mov al, 0x1				; eax = 1
+26: 31 db		xor ebx, ebx			; ebx = 0
+28: cd 80		int 0x80
+
+	# data section
+2a: e8 d5 ff ff ff 			call 0x4
+2f: 69 64 2e 74 78 74			id.txt
+35: 90					nop
+36: e8 df ff ff ff			call 0x1a
+3b: 32 30 39 31 39 32 37 39 38	209192798
+
+
+"\x31\xC0\xEB\x26\x5B\x88\x43\x06\xB0\x08\x31\xC9\x66\xB9\xFF\x01\xCD\x80"
+"\x89\xC3\x31\xC0\xB0\x04\xEB\x1C\x59\x31\xD2\xB2\x08\x42\xCD\x80"
+"\x31\xC0\xB0\x01\x31\xDB\xCD\x80"
+"\xE8\xD5\xFF\xFF\xFF\x69\x64\x2E\x74\x78\x74"
+"\x90"
+"\xE8\xDF\xFF\xFF\xFF\x32\x30\x39\x31\x39\x32\x37\x39\x38"
